@@ -161,26 +161,7 @@ The code begins by installing and importing the necessary libraries for data pro
 ### Step 3: LSTM Deep Learning without Feature Engineering
 **File**: `CICIDS 2017/2017_LSTM_without_feature_extraction.ipynb`
 
-**What this notebook does:**
-- **Raw Data Processing**: Uses the original dataset without feature selection or engineering
-- **Direct LSTM Implementation**: 
-  - Processes all 79 features directly through LSTM layers
-  - No feature reduction or selection applied
-  - Tests LSTM's ability to learn from raw network traffic data
-- **Model Architecture**: Similar LSTM structure but with:
-  - Higher input dimensionality (all features)
-  - Potentially different layer configurations
-  - Same regularization techniques (dropout, pooling)
-- **Training Process**: 
-  - Longer training time due to higher feature dimensionality
-  - Same loss function and optimizer as Step 2
-  - Validation monitoring for overfitting detection
-- **Performance Comparison**: 
-  - Compares results with feature-engineered LSTM (Step 2)
-  - Shows impact of feature engineering on deep learning performance
-  - Demonstrates trade-offs between raw data processing and feature selection
-
-**Expected Output**: LSTM performance on raw data, comparison with feature-engineered approach
+The code begins by installing and importing all necessary libraries for data handling, visualization, and machine learning, then downloads the CICIDS2017 dataset using kagglehub, loads all CSV files in the folder, and merges them into a single DataFrame. It cleans the data by stripping extra spaces from column names, replacing negative values with zero, removing zero-variance and duplicate columns, handling infinities, dropping NaN rows and duplicates, and eliminating columns with identical values. Attack labels are grouped into broader categories (Dos, WebAttack, BruteForce) to simplify classification. All numeric features are normalized to a 0–1 range using MinMaxScaler. Here, X (features) contains all numeric traffic statistics such as flow duration, packet counts, byte counts, and timing metrics, while Y (target) is the Label column representing the attack category, one-hot encoded into seven binary columns (BENIGN, Bot, BruteForce, Dos, Infiltration, PortScan, WebAttack). The dataset is split into training (80%) and testing (20%) sets, with both subsets reduced to 10% for faster execution. The features are reshaped into 3D format for LSTM input, and an LSTM-based model with stacked LSTM layers, dropout for regularization, and a softmax output layer is defined and compiled using categorical cross-entropy and the Adam optimizer. Training runs on GPU with a custom callback logging GPU memory usage after each epoch, and the model is finally evaluated on the test set to report loss and accuracy for network intrusion detection performance.
 
 ---
 
