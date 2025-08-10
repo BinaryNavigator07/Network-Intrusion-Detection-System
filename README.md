@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements a comprehensive Network Intrusion Detection System (NIDS) using machine learning and deep learning approaches to identify and classify various types of network attacks. The system analyzes network traffic patterns from the CICIDS 2017 dataset to detect malicious activities including DDoS attacks, port scans, web attacks, and infiltration attempts. The project compares traditional machine learning algorithms with LSTM-based deep learning models to achieve high accuracy in intrusion detection.
+This project delivers a robust Network Intrusion Detection System (NIDS) designed to help organizations safeguard their digital infrastructure against evolving cyber threats. Leveraging multiple CICIDS datasets from 2017 and 2018, the system learns from a wide range of real-world attack scenarios — including DDoS, port scans, brute-force attempts, web attacks, and infiltration — to provide a more comprehensive and resilient detection capability. By combining traditional machine learning models with LSTM-based deep learning architectures, the solution balances interpretability, speed, and accuracy, ensuring both quick response in operational environments and adaptability to new threat patterns. This hybrid approach enables businesses to proactively detect and classify malicious traffic with high precision, reducing the risk of data breaches, financial loss, and operational downtime while supporting compliance with security standards and regulations.
 
 ---
 
