@@ -154,23 +154,7 @@ The code starts by installing and importing all required libraries for data hand
 ### Step 2: LSTM Deep Learning with Feature Engineering
 **File**: `CICIDS 2017/2017_LSTM_with_feature_extraction.ipynb`
 
-**What this notebook does:**
-- **Data Preprocessing**: Similar data cleaning and feature engineering as Step 1
-- **Feature Selection**: Uses the same RFE and Random Forest feature selection methods
-- **LSTM Architecture**: Implements a deep learning model with:
-  - LSTM layers for sequence learning from network flow patterns
-  - Dense layers for classification
-  - Dropout layers for regularization
-  - MaxPooling for feature aggregation
-- **Data Reshaping**: Converts tabular data into 3D sequences suitable for LSTM processing
-- **Model Training**: 
-  - Uses categorical cross-entropy loss function
-  - Adam optimizer for gradient descent
-  - Includes validation split for monitoring overfitting
-- **Performance Analysis**: Evaluates LSTM performance against traditional ML models
-- **Comparative Study**: Shows how feature engineering affects deep learning performance
-
-**Expected Output**: LSTM model performance metrics and comparison with traditional ML approaches
+The code begins by installing and importing the necessary libraries for data processing, visualization, and machine learning, including CatBoost, XGBoost, and TensorFlow. It downloads the CICIDS2017 dataset using kagglehub, loads all CSV files in the directory, and merges them into a single DataFrame. Data cleaning removes leading/trailing spaces in column names, replaces negative values with zero, drops zero-variance and duplicate columns, handles infinities, removes NaN rows, and eliminates duplicate records. Attack labels are grouped into broader categories such as Dos, WebAttack, and BruteForce for simpler classification. All numeric columns are normalized to a 0–1 range using MinMaxScaler, while the target Label column is one-hot encoded so each class (e.g., BENIGN, Bot, BruteForce, Dos, Infiltration, PortScan, WebAttack) becomes its own binary column. Here, X (features) contains the normalized network traffic statistics such as flow duration, packet counts, byte counts, and timing metrics, while Y (target) is the one-hot encoded label matrix representing the attack category of each record. The dataset is split into training (80%) and testing (20%) sets, with both subsets further reduced to 10% for faster execution. Feature selection is performed with a Random Forest model to retain only the most important features, and the resulting feature matrices are reshaped into 3D arrays for LSTM compatibility. An LSTM-based deep learning model with multiple stacked LSTM layers, dropout for regularization, and a softmax output layer is defined and compiled using categorical cross-entropy loss and the Adam optimizer. The model is trained on GPU with custom logging of GPU usage at the end of each epoch. Finally, the trained LSTM is evaluated on the test set, reporting both loss and accuracy for network intrusion detection performance.
 
 ---
 
