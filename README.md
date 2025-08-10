@@ -23,10 +23,10 @@ Network-Intrusion-Detection-System/
 
 ---
 
-## Understanding the Dataset — CICIDS 2017 Feature Breakdown
+## Understanding the Dataset — CICIDS 2017 and 2018 Feature Breakdown
 
-**Dataset**: CICIDS 2017 (Canadian Institute for Cybersecurity Intrusion Detection System Dataset)
-**Records**: \~2.8M flows (rows)
+**Dataset**: CICIDS 2017 and 2018 (Canadian Institute for Cybersecurity Intrusion Detection System Dataset)
+**Records**: \~2.8M flows (rows) (only on 2017)
 **Columns**: 79 numerical features + 1 target label
 
 **What each column represents:**
@@ -93,6 +93,19 @@ Network-Intrusion-Detection-System/
   * **BENIGN** — Normal traffic
   * **Attack types** — e.g., DDoS, PortScan, Botnet, Brute Force, Web Attack, Infiltration, Heartbleed.
 * **Why it matters:** This is the ground truth for model training.
+
+---
+
+### 9. Attack Surface and Explanation about Attacks
+ 
+* **DDoS (Distributed Denial of Service)** – Overwhelms a network or service with excessive traffic, causing outages.
+* **Port Scan** – Rapidly probes network ports to find vulnerabilities for later exploitation.
+* **Brute Force** – Repeatedly attempts passwords or credentials until access is gained.
+* **Web Attacks** – Exploits vulnerabilities in websites or web applications, such as SQL injection or cross-site scripting.
+* **Infiltration** – Covertly gains unauthorized access to internal systems to steal data or install malware.
+* **Botnet** – Uses a network of compromised devices to carry out coordinated malicious actions.
+* **Heartbleed** – Exploits a flaw in SSL/TLS to read sensitive data from memory.
+
 
 ## 🔧 Setup and Installation Instructions
 
@@ -188,7 +201,7 @@ The LSTM model without feature extraction achieves:
 
 2. **Model Comparison**: Random Forest and XGBoost perform best among traditional ML algorithms, while LSTM shows competitive performance for deep learning approaches
 
-3. **Dataset**: The system analyzes 2,830,743 network flow records with 79 features from the CICIDS 2017 dataset, covering various attack types including DDoS, Port Scan, Web Attacks, and Infiltration
+3. **Dataset**: The system analyzes 2,830,743 network flow records with 79 features from the CICIDS 2017 and 2018 dataset, covering various attack types including DDoS, Port Scan, Web Attacks, and Infiltration
 
 4. **Scalability**: The models can effectively classify both normal and malicious network traffic with high precision and recall rates
 
