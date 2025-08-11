@@ -187,11 +187,11 @@ The code starts by installing and importing all required libraries for data hand
 
 ## 2017 Dataset
 
-**File**: `CICIDS 2017/2017_LSTM_with_feature_extraction.ipynb` 
+**File:** `CICIDS 2017/2017_LSTM_with_feature_extraction.ipynb`
 
-## 2018 Dataset 
+## 2018 Dataset
 
-**File**: `CICIDS 2018/2018 Feature extraction and LSTM.ipynb` 
+**File:** `CICIDS 2018/2018 Feature extraction and LSTM.ipynb`
 
 > **Note:** Due to the large size of the 2018 dataset (~12 GB RAM required), running this notebook on Google Colab may cause the runtime to crash. It is recommended to run the 2018 dataset notebook locally on a machine with sufficient memory.
 
@@ -203,7 +203,16 @@ The code begins by installing and importing the necessary libraries for data pro
 ---
 
 ### 3: LSTM Deep Learning without Feature Engineering
+
+## 2017 Dataset
+
 **File**: `CICIDS 2017/2017_LSTM_without_feature_extraction.ipynb`
+
+## 2018 Dataset
+
+**File**: `CICIDS 2018/2018_without_feature_extraction_and_LSTM.ipynb`
+
+> **Note:** Due to the large size of the 2018 dataset (~12 GB RAM required), running this notebook on Google Colab may cause the runtime to crash. It is recommended to run the 2018 dataset notebook locally on a machine with sufficient memory.
 
 The code begins by installing and importing all necessary libraries for data handling, visualization, and machine learning, then downloads the CICIDS2017 dataset using kagglehub, loads all CSV files in the folder, and merges them into a single DataFrame. It cleans the data by stripping extra spaces from column names, replacing negative values with zero, removing zero-variance and duplicate columns, handling infinities, dropping NaN rows and duplicates, and eliminating columns with identical values. Attack labels are grouped into broader categories (Dos, WebAttack, BruteForce) to simplify classification. All numeric features are normalized to a 0–1 range using MinMaxScaler. Here, X (features) contains all numeric traffic statistics such as flow duration, packet counts, byte counts, and timing metrics, while Y (target) is the Label column representing the attack category, one-hot encoded into seven binary columns (BENIGN, Bot, BruteForce, Dos, Infiltration, PortScan, WebAttack). The dataset is split into training (80%) and testing (20%) sets, with both subsets reduced to 10% for faster execution. The features are reshaped into 3D format for LSTM input, and an LSTM-based model with stacked LSTM layers, dropout for regularization, and a softmax output layer is defined and compiled using categorical cross-entropy and the Adam optimizer. Training runs on GPU with a custom callback logging GPU memory usage after each epoch, and the model is finally evaluated on the test set to report loss and accuracy for network intrusion detection performance.
 
