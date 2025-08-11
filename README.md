@@ -156,7 +156,22 @@ pip install -r requirements.txt
 
 ---
 
+
 ## 🛠️ Step-by-Step Guide
+
+> **Note:** For demonstration and resource efficiency, only **10% of the dataset** is selected for training and testing in the provided code. If you wish to use the **entire dataset** (approximately 2.8 million records), simply **delete or comment out the cell** that performs this data reduction. This cell is present in all the notebooks and typically looks like:
+>
+> ```python
+> # Selecting 10% of random rows for better running time
+> X_train = X_train.sample(frac=0.1, replace=True, random_state=1)
+> y_train = y_train.sample(frac=0.1, replace=True, random_state=1)
+> X_test = X_test.sample(frac=0.1, replace=True, random_state=1)
+> y_test = y_test.sample(frac=0.1, replace=True, random_state=1)
+> print(X_train.shape, y_train.shape)
+> print(X_test.shape, y_test.shape)
+> ```
+>
+> Removing this cell will allow the code to process the full dataset, but ensure your machine has sufficient memory and compute resources.
 
 > **Note:** The following steps are independent and can be executed in parallel. You may choose any step based on your preferred approach or experiment with multiple methods simultaneously.
 
@@ -228,4 +243,4 @@ The LSTM model without feature extraction achieves:
 - **Recall**: Measures the ability to find all malicious traffic instances
 - **F1-Score**: Harmonic mean of precision and recall, providing balanced performance metric
 
-The high accuracy rates (>99% for traditional ML, >97% for LSTM) indicate that the system can effectively distinguish between normal network traffic and various types of cyber attacks, making it suitable for real-world network security applications.
+> **Note:** The exceptionally high accuracy and metric scores—particularly for traditional machine learning models—may indicate potential overfitting, given the dataset's complexity and large number of features. To improve generalizability and robustness, it is recommended to validate the models on external datasets and consider applying additional regularization techniques.
