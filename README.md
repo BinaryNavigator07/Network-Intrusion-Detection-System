@@ -4,6 +4,15 @@
 
 This project delivers a robust Network Intrusion Detection System (NIDS) designed to help organizations safeguard their digital infrastructure against evolving cyber threats. Leveraging multiple CICIDS datasets from 2017 and 2018, the system learns from a wide range of real-world attack scenarios — including DDoS, port scans, brute-force attempts, web attacks, and infiltration — to provide a more comprehensive and resilient detection capability. By combining traditional machine learning models with LSTM-based deep learning architectures, the solution balances interpretability, speed, and accuracy, ensuring both quick response in operational environments and adaptability to new threat patterns. This hybrid approach enables businesses to proactively detect and classify malicious traffic with high precision, reducing the risk of data breaches, financial loss, and operational downtime while supporting compliance with security standards and regulations.
 
+### **Further Reading**
+
+- [Redscan: What is NIDS?](https://www.redscan.com/services/nids/)
+- [Stamus Networks: NIDS Tools](https://www.stamus-networks.com/blog/what-are-nids-tools)
+- [IBM: Intrusion Detection Systems](https://www.ibm.com/think/topics/intrusion-detection-system)
+- [Wikipedia: Intrusion Detection System](https://en.wikipedia.org/wiki/Intrusion_detection_system)
+
+--- 
+
 ---
 
 ## 📁 Project Structure
@@ -12,7 +21,7 @@ This project delivers a robust Network Intrusion Detection System (NIDS) designe
 Network-Intrusion-Detection-System/
 │
 ├── CICIDS 2017/                                    # Main project directory containing all analysis notebooks
-│   ├── 2017_feature_extraction_with_machine_learning.ipynb    # Traditional ML models with feature engineering
+│   ├── 2017 LSTM with feature extraction.ipynb   # Traditional ML models with feature engineering
 │   ├── 2017_LSTM_with_feature_extraction.ipynb               # LSTM model with feature extraction
 │   └── 2017_LSTM_without_feature_extraction.ipynb            # LSTM model without feature engineering
 │
@@ -111,6 +120,8 @@ Network-Intrusion-Detection-System/
 
 ### Option 1: Run on Google Colab (Recommended)
 
+> **Note:** Due to the large size of the 2018 dataset (~12 GB RAM required), running this notebook on Google Colab may cause the runtime to crash. It is recommended to run the 2018 dataset notebook locally on a machine with sufficient memory.
+
 #### 1. Open the notebooks in Google Colab
 Each notebook contains a "Open in Colab" button at the top. Click on it to be redirected to Google Colab.
 
@@ -143,20 +154,13 @@ source .venv/bin/activate   # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-#### 3. Set up Kaggle API (for dataset download)
-
-```bash
-pip install kaggle
-# Configure your Kaggle API credentials
-# Download kaggle.json from your Kaggle account and place it in ~/.kaggle/
-```
-
-
 ---
 
 ## 🛠️ Step-by-Step Guide
 
-### Step 1: Traditional Machine Learning Analysis with Feature Engineering
+> **Note:** The following steps are independent and can be executed in parallel. You may choose any step based on your preferred approach or experiment with multiple methods simultaneously.
+
+### 1: Traditional Machine Learning Analysis with Feature Engineering
 **File**: `CICIDS 2017/2017_feature_extraction_with_machine_learning.ipynb`
 
 
@@ -164,14 +168,26 @@ The code starts by installing and importing all required libraries for data hand
 
 ---
 
-### Step 2: LSTM Deep Learning with Feature Engineering
-**File**: `CICIDS 2017/2017_LSTM_with_feature_extraction.ipynb`
+### 2: LSTM Deep Learning with Feature Engineering
+
+## 2017 Dataset
+
+**File**: `CICIDS 2017/2017_LSTM_with_feature_extraction.ipynb` 
+
+## 2018 Dataset 
+
+**File**: `CICIDS 2018/2018 Feature extraction and LSTM.ipynb` 
+
+> **Note:** Due to the large size of the 2018 dataset (~12 GB RAM required), running this notebook on Google Colab may cause the runtime to crash. It is recommended to run the 2018 dataset notebook locally on a machine with sufficient memory.
 
 The code begins by installing and importing the necessary libraries for data processing, visualization, and machine learning, including CatBoost, XGBoost, and TensorFlow. It downloads the CICIDS2017 dataset using kagglehub, loads all CSV files in the directory, and merges them into a single DataFrame. Data cleaning removes leading/trailing spaces in column names, replaces negative values with zero, drops zero-variance and duplicate columns, handles infinities, removes NaN rows, and eliminates duplicate records. Attack labels are grouped into broader categories such as Dos, WebAttack, and BruteForce for simpler classification. All numeric columns are normalized to a 0–1 range using MinMaxScaler, while the target Label column is one-hot encoded so each class (e.g., BENIGN, Bot, BruteForce, Dos, Infiltration, PortScan, WebAttack) becomes its own binary column. Here, X (features) contains the normalized network traffic statistics such as flow duration, packet counts, byte counts, and timing metrics, while Y (target) is the one-hot encoded label matrix representing the attack category of each record. The dataset is split into training (80%) and testing (20%) sets, with both subsets further reduced to 10% for faster execution. Feature selection is performed with a Random Forest model to retain only the most important features, and the resulting feature matrices are reshaped into 3D arrays for LSTM compatibility. An LSTM-based deep learning model with multiple stacked LSTM layers, dropout for regularization, and a softmax output layer is defined and compiled using categorical cross-entropy loss and the Adam optimizer. The model is trained on GPU with custom logging of GPU usage at the end of each epoch. Finally, the trained LSTM is evaluated on the test set, reporting both loss and accuracy for network intrusion detection performance.
 
+
+
+
 ---
 
-### Step 3: LSTM Deep Learning without Feature Engineering
+### 3: LSTM Deep Learning without Feature Engineering
 **File**: `CICIDS 2017/2017_LSTM_without_feature_extraction.ipynb`
 
 The code begins by installing and importing all necessary libraries for data handling, visualization, and machine learning, then downloads the CICIDS2017 dataset using kagglehub, loads all CSV files in the folder, and merges them into a single DataFrame. It cleans the data by stripping extra spaces from column names, replacing negative values with zero, removing zero-variance and duplicate columns, handling infinities, dropping NaN rows and duplicates, and eliminating columns with identical values. Attack labels are grouped into broader categories (Dos, WebAttack, BruteForce) to simplify classification. All numeric features are normalized to a 0–1 range using MinMaxScaler. Here, X (features) contains all numeric traffic statistics such as flow duration, packet counts, byte counts, and timing metrics, while Y (target) is the Label column representing the attack category, one-hot encoded into seven binary columns (BENIGN, Bot, BruteForce, Dos, Infiltration, PortScan, WebAttack). The dataset is split into training (80%) and testing (20%) sets, with both subsets reduced to 10% for faster execution. The features are reshaped into 3D format for LSTM input, and an LSTM-based model with stacked LSTM layers, dropout for regularization, and a softmax output layer is defined and compiled using categorical cross-entropy and the Adam optimizer. Training runs on GPU with a custom callback logging GPU memory usage after each epoch, and the model is finally evaluated on the test set to report loss and accuracy for network intrusion detection performance.
