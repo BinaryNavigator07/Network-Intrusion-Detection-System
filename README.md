@@ -11,7 +11,41 @@ This project delivers a robust Network Intrusion Detection System (NIDS) designe
 - [IBM: Intrusion Detection Systems](https://www.ibm.com/think/topics/intrusion-detection-system)
 - [Wikipedia: Intrusion Detection System](https://en.wikipedia.org/wiki/Intrusion_detection_system)
 
---- 
+Here’s the list with source links added:
+
+---
+
+**Palo Alto Networks – Advanced Threat Prevention**
+Uses machine learning and deep learning models to detect and block unknown command-and-control traffic in real time. This system goes beyond signature-based detection by leveraging AI techniques inline.
+
+* [Wikipedia](https://en.wikipedia.org/wiki/Palo_Alto_Networks)
+* [Reddit discussion](https://www.reddit.com/r/cybersecurity/comments/r2fvrw/are_network_intrusion_detection_system_using/)
+* [IGI Global article](https://www.igi-global.com/dictionary/palo-alto-networks/68662)
+* [Palo Alto Networks official page](https://www.paloaltonetworks.com/cyberpedia/what-is-an-intrusion-prevention-system-ips)
+* [Gartner listing](https://www.gartner.com/reviews/market/network-firewalls/vendor/palo-alto-networks)
+
+---
+
+**Vectra AI – Vectra Detect / NDR Platform**
+Employs AI-driven behavior analysis to detect attackers’ behavior, prioritize incidents, and automate detection workflows. Although it doesn’t specify CNN–LSTM, the platform is firmly grounded in ML-based anomaly detection.
+
+* [Wikipedia](https://en.wikipedia.org/wiki/Vectra_AI)
+
+---
+
+**Enea – Qosmos Threat Detection SDK**
+Offers deep packet inspection combined with traffic intelligence to detect anomalous or malicious network behavior—used as a foundation for many enterprise-grade NIDS/IPS solutions. It enhances detection via AI/ML-powered pattern analysis.
+
+* [Secureworks partner page](https://www.secureworks.com/partners/enea-qosmos)
+* [Wikipedia](https://en.wikipedia.org/wiki/ENEA_AB)
+* [Information Security Stack Exchange discussion](https://security.stackexchange.com/questions/170782/how-effective-are-deep-packet-inspection-techniques)
+
+---
+
+**Splunk – Enterprise Security with ML**
+While primarily a SIEM, Splunk integrates machine learning models into its analytics and anomaly detection pipelines. It enriches intrusion detection alerting using statistical and ML-driven insights.
+
+* [Wikipedia](https://en.wikipedia.org/wiki/Splunk)
 
 ---
 
@@ -33,10 +67,6 @@ Network-Intrusion-Detection-System/
 ---
 
 ## Understanding the Dataset — CICIDS 2017 and 2018 Feature Breakdown
-
-**Dataset**: CICIDS 2017 and 2018 (Canadian Institute for Cybersecurity Intrusion Detection System Dataset)
-**Records**: \~2.8M flows (rows) (only on 2017)
-**Columns**: 79 numerical features + 1 target label
 
 **What each column represents:**
 
@@ -115,6 +145,21 @@ Network-Intrusion-Detection-System/
 * **Botnet** – Uses a network of compromised devices to carry out coordinated malicious actions.
 * **Heartbleed** – Exploits a flaw in SSL/TLS to read sensitive data from memory.
 
+### Additional Datasets for Further Research
+
+Beyond CICIDS 2017/2018, several other public datasets are available for network intrusion detection research. These datasets share similar features but are collected by different organizations, capturing diverse traffic patterns and attack scenarios in various environments:
+
+- **NSL-KDD**: An improved version of the classic KDD Cup 1999 dataset, addressing issues like redundant records and class imbalance. It is widely used for benchmarking intrusion detection algorithms.  
+  - [NSL-KDD Repository](https://github.com/defcom17/NSL_KDD)
+
+- **AWID (Aegean WiFi Intrusion Dataset)**: Focused on WiFi network attacks, AWID provides labeled traffic data for evaluating intrusion detection in wireless environments.  
+  - [AWID Dataset](https://icsdweb.aegean.gr/awid/)
+
+These datasets can be used to test the generalizability of your models and to compare performance across different network environments and attack types.
+
+**Dataset**: CICIDS 2017 and 2018 (Canadian Institute for Cybersecurity Intrusion Detection System Dataset)
+**Records**: \~2.8M flows (rows) (only on 2017)
+**Columns**: 79 numerical features + 1 target label
 
 ## 🔧 Setup and Installation Instructions
 
