@@ -4,48 +4,13 @@
 
 This project delivers a robust Network Intrusion Detection System (NIDS) designed to help organizations safeguard their digital infrastructure against evolving cyber threats. Leveraging multiple CICIDS datasets from 2017 and 2018, the system learns from a wide range of real-world attack scenarios — including DDoS, port scans, brute-force attempts, web attacks, and infiltration — to provide a more comprehensive and resilient detection capability. By combining traditional machine learning models with LSTM-based deep learning architectures, the solution balances interpretability, speed, and accuracy, ensuring both quick response in operational environments and adaptability to new threat patterns. This hybrid approach enables businesses to proactively detect and classify malicious traffic with high precision, reducing the risk of data breaches, financial loss, and operational downtime while supporting compliance with security standards and regulations.
 
-### **Further Reading**
-
-- [Redscan: What is NIDS?](https://www.redscan.com/services/nids/)
-- [Stamus Networks: NIDS Tools](https://www.stamus-networks.com/blog/what-are-nids-tools)
-- [IBM: Intrusion Detection Systems](https://www.ibm.com/think/topics/intrusion-detection-system)
-- [Wikipedia: Intrusion Detection System](https://en.wikipedia.org/wiki/Intrusion_detection_system)
-
-Here’s the list with source links added:
-
 ---
 
-**Palo Alto Networks – Advanced Threat Prevention**
-Uses machine learning and deep learning models to detect and block unknown command-and-control traffic in real time. This system goes beyond signature-based detection by leveraging AI techniques inline.
+## Additional Documentation
 
-* [Wikipedia](https://en.wikipedia.org/wiki/Palo_Alto_Networks)
-* [Reddit discussion](https://www.reddit.com/r/cybersecurity/comments/r2fvrw/are_network_intrusion_detection_system_using/)
-* [IGI Global article](https://www.igi-global.com/dictionary/palo-alto-networks/68662)
-* [Palo Alto Networks official page](https://www.paloaltonetworks.com/cyberpedia/what-is-an-intrusion-prevention-system-ips)
-* [Gartner listing](https://www.gartner.com/reviews/market/network-firewalls/vendor/palo-alto-networks)
+please refer to [NIDS-Info-README.md](NIDS-Info-README.md).
 
----
-
-**Vectra AI – Vectra Detect / NDR Platform**
-Employs AI-driven behavior analysis to detect attackers’ behavior, prioritize incidents, and automate detection workflows. Although it doesn’t specify CNN–LSTM, the platform is firmly grounded in ML-based anomaly detection.
-
-* [Wikipedia](https://en.wikipedia.org/wiki/Vectra_AI)
-
----
-
-**Enea – Qosmos Threat Detection SDK**
-Offers deep packet inspection combined with traffic intelligence to detect anomalous or malicious network behavior—used as a foundation for many enterprise-grade NIDS/IPS solutions. It enhances detection via AI/ML-powered pattern analysis.
-
-* [Secureworks partner page](https://www.secureworks.com/partners/enea-qosmos)
-* [Wikipedia](https://en.wikipedia.org/wiki/ENEA_AB)
-* [Information Security Stack Exchange discussion](https://security.stackexchange.com/questions/170782/how-effective-are-deep-packet-inspection-techniques)
-
----
-
-**Splunk – Enterprise Security with ML**
-While primarily a SIEM, Splunk integrates machine learning models into its analytics and anomaly detection pipelines. It enriches intrusion detection alerting using statistical and ML-driven insights.
-
-* [Wikipedia](https://en.wikipedia.org/wiki/Splunk)
+Consulting this file will provide further context and technical insights beyond the main project overview.
 
 ---
 
@@ -54,112 +19,23 @@ While primarily a SIEM, Splunk integrates machine learning models into its analy
 ```
 Network-Intrusion-Detection-System/
 │
-├── CICIDS 2017/                                    # Main project directory containing all analysis notebooks
+├── CICIDS 2017/                                 
 │   ├── 2017 LSTM with feature extraction.ipynb   # Traditional ML models with feature engineering
 │   ├── 2017_LSTM_with_feature_extraction.ipynb               # LSTM model with feature extraction
 │   └── 2017_LSTM_without_feature_extraction.ipynb            # LSTM model without feature engineering
-│
+├── CICIDS 2018/                                    
+│   ├── 2018 Feature extraction and LSTM.ipynb   # models with feature engineering
+│   ├── 2018 LSTM without Feature Extraction.ipynb # LSTM model without feature extraction
+|
+├── Data-Set-README.md                                       # DataSet README
 ├── README.md                                       # Project description and usage guide (this file)
 └── .gitignore                                      # Git ignore file for version control
 
 ```
 
----
-
-## Understanding the Dataset — CICIDS 2017 and 2018 Feature Breakdown
-
-**What each column represents:**
-
-### **1. Flow Identification & Duration**
-
-* **Flow Duration** — Total time (in microseconds) between the first and last packet of the flow.
-* **Protocol, Source Port, Destination Port** — Identify the network connection endpoints.
-* **Why it matters:** Certain attacks have very short or very long flows compared to normal traffic.
+For detailed information about the datasets used in this project, please refer to [Data-Set-README.md](Data-Set-README.md).
 
 ---
-
-### **2. Packet Counts and Sizes**
-
-* **Total Fwd Packets / Total Bwd Packets** — Number of packets sent forward (source → destination) and backward.
-* **Total Length of Fwd/Bwd Packets** — Sum of bytes sent in each direction.
-* **Min/Max/Mean/Std of Packet Lengths** — Packet size statistics.
-* **Why it matters:** Attacks often have repetitive, uniform packet sizes or unusual size patterns.
-
----
-
-### **3. Timing (Inter-Arrival Times)**
-
-* **Flow IAT Mean / Max / Min / Std** — Time gaps between packets in the whole flow.
-* **Fwd IAT / Bwd IAT** — Same but calculated separately for each direction.
-* **Why it matters:** Some attacks (e.g., flooding) send packets at high speed with very low IAT.
-
----
-
-### **4. TCP Flags & Header Information**
-
-* **SYN, ACK, PSH, URG, FIN, RST, ECE, CWE Flag Counts** — Count of specific TCP control flags.
-* **Fwd Header Length / Bwd Header Length** — Size of headers in packets.
-* **Why it matters:** Abnormal flag patterns (e.g., SYN flood) signal scanning or intrusion.
-
----
-
-### **5. Bulk Data Transfer Metrics**
-
-* **Avg Bytes/Bulk, Avg Packets/Bulk, Avg Bulk Rate** — Bulk transfer behavior in forward/backward directions.
-* **Why it matters:** File transfers or data exfiltration often show large bulk metrics.
-
----
-
-### **6. Subflow Statistics**
-
-* **Subflow Fwd Packets/Bytes, Subflow Bwd Packets/Bytes** — Packets and bytes within smaller segments of the flow.
-* **Why it matters:** Detects bursts of traffic or chunked data transfers.
-
----
-
-### **7. Active and Idle Times**
-
-* **Active Mean / Min / Max / Std** — Periods when packets are actively being sent.
-* **Idle Mean / Min / Max / Std** — Periods with no traffic.
-* **Why it matters:** Attacks like brute force might have short active bursts and long idle waits.
-
----
-
-### **8. Target Column**
-
-* **Label** — Category of the traffic:
-
-  * **BENIGN** — Normal traffic
-  * **Attack types** — e.g., DDoS, PortScan, Botnet, Brute Force, Web Attack, Infiltration, Heartbleed.
-* **Why it matters:** This is the ground truth for model training.
-
----
-
-### 9. Attack Surface and Explanation about Attacks
- 
-* **DDoS (Distributed Denial of Service)** – Overwhelms a network or service with excessive traffic, causing outages.
-* **Port Scan** – Rapidly probes network ports to find vulnerabilities for later exploitation.
-* **Brute Force** – Repeatedly attempts passwords or credentials until access is gained.
-* **Web Attacks** – Exploits vulnerabilities in websites or web applications, such as SQL injection or cross-site scripting.
-* **Infiltration** – Covertly gains unauthorized access to internal systems to steal data or install malware.
-* **Botnet** – Uses a network of compromised devices to carry out coordinated malicious actions.
-* **Heartbleed** – Exploits a flaw in SSL/TLS to read sensitive data from memory.
-
-### Additional Datasets for Further Research
-
-Beyond CICIDS 2017/2018, several other public datasets are available for network intrusion detection research. These datasets share similar features but are collected by different organizations, capturing diverse traffic patterns and attack scenarios in various environments:
-
-- **NSL-KDD**: An improved version of the classic KDD Cup 1999 dataset, addressing issues like redundant records and class imbalance. It is widely used for benchmarking intrusion detection algorithms.  
-  - [NSL-KDD Repository](https://github.com/defcom17/NSL_KDD)
-
-- **AWID (Aegean WiFi Intrusion Dataset)**: Focused on WiFi network attacks, AWID provides labeled traffic data for evaluating intrusion detection in wireless environments.  
-  - [AWID Dataset](https://icsdweb.aegean.gr/awid/)
-
-These datasets can be used to test the generalizability of your models and to compare performance across different network environments and attack types.
-
-**Dataset**: CICIDS 2017 and 2018 (Canadian Institute for Cybersecurity Intrusion Detection System Dataset)
-**Records**: \~2.8M flows (rows) (only on 2017)
-**Columns**: 79 numerical features + 1 target label
 
 ## 🔧 Setup and Installation Instructions
 
